@@ -36,6 +36,7 @@ use Sulu\Component\Webspace\Portal;
 use Sulu\Component\Webspace\Webspace;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Route;
+use Symfony\Component\Routing\RouteCollection;
 
 class ContentRouteProviderTest extends \PHPUnit_Framework_TestCase
 {
