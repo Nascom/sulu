@@ -21,6 +21,8 @@ use Sulu\Component\Localization\Localization;
 use Sulu\Component\Webspace\Analyzer\RequestAnalyzerInterface;
 use Sulu\Component\Webspace\Webspace;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Route;
+use Symfony\Component\Routing\RouteCollection;
 
 class CustomUrlRouteProviderTest extends \PHPUnit_Framework_TestCase
 {
@@ -146,5 +148,26 @@ class CustomUrlRouteProviderTest extends \PHPUnit_Framework_TestCase
             ],
             $defaults
         );
+    }
+
+    public function testGetRouteByRouteName()
+    {
+        $requestAnalyzer = $this->prophesize(RequestAnalyzerInterface::class);
+        $pathBuilder = $this->prophesize(PathBuilder::class);
+
+        $provider = new CustomUrlRouteProvider(
+            $requestAnalyzer->reveal(),
+            $pathBuilder->reveal(),
+            'prod'
+        );
+
+        $collection = new RouteCollection();
+        $route = new Route('/dummy');
+        $collection->add('dummy', $route);
+        $provider->setRouteCollection($collection);
+
+        // Test the route provider
+        $this->assertEquals($route, $provider->getRouteByName('dummy'));
+        $this->assertNull($provider->getRouteByName('unknown'));
     }
 }
