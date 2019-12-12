@@ -17,6 +17,7 @@
         "php": "^7.1",
         "cboden/ratchet": "0.3.*",
         "dantleech/phpcr-migrations-bundle": "~1.0",
+        "doctrine/orm": "^2.5.3",
         "doctrine/annotations": "^1.2",
         "doctrine/common": "^2.7.1",
         "doctrine/data-fixtures": "^1.1",
@@ -104,6 +105,7 @@
         "symfony/var-dumper": "^3.4",
         "symfony/web-profiler-bundle": "^3.4",
         "symfony/web-server-bundle": "^3.4",
+        "massive/build-bundle": "~0.3.0",
         "zendframework/zend-stdlib": "~2.3",
         "zendframework/zendsearch": "@dev"
     },

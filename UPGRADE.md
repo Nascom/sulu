@@ -198,6 +198,13 @@ ALTER TABLE me_collection_meta CHANGE title title VARCHAR(191) NOT NULL;
 ALTER TABLE me_file_version_meta CHANGE title title VARCHAR(191) NOT NULL;
 ALTER TABLE me_file_versions CHANGE name name VARCHAR(191) NOT NULL;
 ```
+## 1.6.24
+
+### Collection Repository count function changed
+
+For the php 7.3 compatibility we needed to upgrade doctrine/orm for this we needed to rename the following method:
+
+ * Sulu\Bundle\MediaBundle\Entity\CollectionRepositoryInterface::count => Sulu\Bundle\MediaBundle\Entity\CollectionRepositoryInterface::countCollections
 
 ## 1.6.17
 

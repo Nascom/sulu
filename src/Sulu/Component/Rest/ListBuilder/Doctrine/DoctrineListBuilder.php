@@ -387,7 +387,7 @@ class DoctrineListBuilder extends AbstractListBuilder
                 $this->user,
                 $this->permissions[$this->permission],
                 $this->securedEntityName,
-                $this->securedEntityName
+                $this->encodeAlias($this->securedEntityName)
             );
         }
 

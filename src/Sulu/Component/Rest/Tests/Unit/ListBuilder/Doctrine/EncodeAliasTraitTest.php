@@ -51,7 +51,6 @@ class EncodeAliasTraitTest extends TestCase
     {
         $method = new \ReflectionMethod(get_class($this->encodeAlias), 'encodeAlias');
         $method->setAccessible(true);
-
         $this->assertEquals($expected, $method->invoke($this->encodeAlias, $value));
     }
 }

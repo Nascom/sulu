@@ -104,7 +104,7 @@ class CollectionManagerTest extends TestCase
             ['test'],
             Argument::any(),
             Argument::any()
-        )->willReturn(new \ArrayIterator([]))->shouldBeCalled();
+        )->willReturn(new \ArrayIterator([]));
         $this->collectionRepository->countCollections(
             0,
             ['search' => 'test', 'locale' => 'de', 'systemCollections' => true],
@@ -123,7 +123,7 @@ class CollectionManagerTest extends TestCase
             ['test'],
             Argument::any(),
             Argument::any()
-        )->willReturn(new \ArrayIterator([]))->shouldBeCalled();
+        )->willReturn(new \ArrayIterator([]));
         $this->collectionRepository->countCollections(
             0,
             ['search' => 'test', 'locale' => 'de', 'systemCollections' => false],

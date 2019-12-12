@@ -13,19 +13,19 @@ env:
     - SULU_DATABASE_DRIVER=pdo_mysql
     - SULU_DATABASE_CHARSET=utf8mb4
     - SULU_DATABASE_COLLATE=utf8mb4_unicode_ci
+    - SYMFONY__DATABASE__DRIVER=pdo_mysql
+    - SYMFONY_DEPRECATIONS_HELPER=weak
 
 matrix:
   include:
     - language: php
-      php: 7.2
+      php: 7.3
       env:
-        - COMPOSER_FLAGS="--prefer-lowest --prefer-dist --no-interaction -vvv"
-        - SULU_DATABASE_DRIVER=pdo_pgsql
-        - SULU_DATABASE_USER=postgres
-        - SULU_DATABASE_PASSWORD=postgres
-        - SULU_PHPCR_TRANSPORT=jackrabbit
-        - SULU_DATABASE_CHARSET=UTF8
-        - SULU_DATABASE_COLLATE=
+        - COMPOSER_FLAGS="--prefer-dist --no-interaction
+        - SYMFONY__DATABASE__DRIVER=pdo_pgsql
+        - SYMFONY__DATABASE__USER=postgres
+        - SYMFONY__DATABASE__PASSWORD=postgres
+        - SYMFONY__PHPCR__TRANSPORT=jackrabbit
         # restart jackrabbit after each suite see: https://github.com/sulu-io/sulu/issues/2137
         - TEST_FLAGS="--jackrabbit-restart"
 
@@ -50,7 +50,7 @@ before_script:
     fi
   # the content tests are intensive and there are memory leaks, this is more pronounced with the Jackalope DBAL PHPCR implementation.
   - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
-  - phpenv config-rm xdebug.ini
+  - phpenv config-rm xdebug.ini || true # dont fail when xdebug is not available
   - php -i | grep memory_limit
   - php -m
   - composer self-update
