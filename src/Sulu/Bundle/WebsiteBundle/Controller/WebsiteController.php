@@ -50,35 +50,31 @@ abstract class WebsiteController extends Controller
 
         $viewTemplate = $structure->getView() . '.' . $requestFormat . '.twig';
 
-        try {
-            // get attributes to render template
-            $data = $this->getAttributes($attributes, $structure, $preview);
-
-            // if partial render only content block else full page
-            if ($partial) {
-                $content = $this->renderBlock(
-                    $viewTemplate,
-                    'content',
-                    $data
-                );
-            } else {
-                $content = parent::renderView(
-                    $viewTemplate,
-                    $data
-                );
-            }
-
-            $response = new Response($content);
-
-            if (!$preview && $this->getCacheTimeLifeEnhancer()) {
-                $this->getCacheTimeLifeEnhancer()->enhance($response, $structure);
-            }
-
-            return $response;
-        } catch (InvalidArgumentException $e) {
-            // template not found
-            throw new HttpException(406, 'Error encountered when rendering content', $e);
+        if (!$this->get('twig')->getLoader()->exists($viewTemplate)) {
+            throw new HttpException(
+                406,
+                sprintf('Page does not exist in "%s" format.', $requestFormat)
+            );
         }
+
+        // get attributes to render template
+        $data = $this->getAttributes($attributes, $structure, $preview);
+
+        // if partial render only content block else full page
+        if ($partial) {
+            $content = $this->renderBlock(
+                $viewTemplate,
+                'content',
+                $data
+            );
+        } else {
+            $content = parent::renderView(
+                $viewTemplate,
+                $data
+            );
+        }
+
+        return new Response($content);
     }
 
     /**
