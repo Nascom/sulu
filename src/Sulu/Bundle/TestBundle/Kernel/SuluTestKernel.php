@@ -38,6 +38,12 @@ class SuluTestKernel extends SuluKernel
             new \Doctrine\Bundle\PHPCRBundle\DoctrinePHPCRBundle(),
             new \Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new \JMS\SerializerBundle\JMSSerializerBundle(),
+            new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
+            new \Symfony\Bundle\MonologBundle\MonologBundle(),
+            new \Symfony\Bundle\TwigBundle\TwigBundle(),
+            new \Dubture\FFmpegBundle\DubtureFFmpegBundle(),
+            new \Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
+            new \FOS\RestBundle\FOSRestBundle(),
 
             // Massive
             new \Massive\Bundle\SearchBundle\MassiveSearchBundle(),
@@ -71,10 +77,15 @@ class SuluTestKernel extends SuluKernel
         }
 
         if (self::CONTEXT_ADMIN === $this->getContext()) {
+<<<<<<< HEAD
             $bundles[] = new \Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle();
             $bundles[] = new \FOS\RestBundle\FOSRestBundle();
             $bundles[] = new \Symfony\Bundle\SecurityBundle\SecurityBundle();
             $bundles[] = new \Sulu\Bundle\ResourceBundle\SuluResourceBundle();
+=======
+            // rest
+            $bundles[] = new \Symfony\Bundle\SecurityBundle\SecurityBundle();
+>>>>>>> 1.6.22
             $bundles[] = new \Sulu\Bundle\AdminBundle\SuluAdminBundle();
             $bundles[] = new \Sulu\Bundle\CollaborationBundle\SuluCollaborationBundle();
             $bundles[] = new \Sulu\Bundle\PreviewBundle\SuluPreviewBundle();
