@@ -108,7 +108,7 @@ class CacheClearer implements CacheClearerInterface
 
         $path = sprintf(
             '%s/cache/website/%s/http_cache',
-            $this->varDir ?: $this->kernelRootDir,src/Sulu/Bundle/WebsiteBundle/Controller/WebsiteController.php
+            $this->varDir ?: $this->kernelRootDir,
             $this->kernelEnvironment
         );
 

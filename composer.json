@@ -42,7 +42,7 @@
         "jms/serializer-bundle": "^2.2",
         "layershifter/tld-extract": "^1.1",
         "massive/build-bundle": "^0.3.0",
-        "massive/search-bundle": "0.16.* || 0.17.*",
+        "massive/search-bundle": "0.16.* || 0.17.* || ^1.0",
         "mtdowling/cron-expression": "^1.1",
         "oro/doctrine-extensions": "^1.0",
         "pagerfanta/pagerfanta": "^1.0.4",
@@ -108,15 +108,6 @@
         "symfony/web-profiler-bundle": "^3.4",
         "symfony/web-server-bundle": "^3.4",
         "massive/build-bundle": "~0.3.0",
-<<<<<<< HEAD
-=======
-        "matthiasnoback/symfony-config-test": "^1.1",
-        "matthiasnoback/symfony-dependency-injection-test": "^0.7.3",
-        "phpunit/phpunit": "^4.8.31",
-        "phpspec/prophecy": "^1.4",
-        "symfony/phpunit-bridge": "^2.8.11 || ^3.0",
-        "symfony/monolog-bundle": "^2.8.11 || ^3.0",
->>>>>>> 1.6.28
         "zendframework/zend-stdlib": "~2.3",
         "zendframework/zendsearch": "@dev"
     },
@@ -191,7 +182,10 @@
             "file": "app/config/parameters.yml"
         },
         "branch-alias": {
-            "dev-develop": "2.0-dev"
+            "dev-release/1.6": "1.6.x-dev",
+            "dev-release/1.7": "1.7.x-dev",
+            "dev-release/2.0": "2.0.x-dev",
+            "dev-master": "2.1.x-dev"
         }
     }
 }
