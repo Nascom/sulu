@@ -19,12 +19,7 @@ matrix:
     - language: php
       php: 7.2
       env:
-        - COMPOSER_FLAGS="--prefer-dist --no-interaction"
-
-    - language: php
-      php: 7.1
-      env:
-        - COMPOSER_FLAGS="--prefer-lowest --prefer-dist --no-interaction"
+        - COMPOSER_FLAGS="--prefer-lowest --prefer-dist --no-interaction -vvv"
         - SULU_DATABASE_DRIVER=pdo_pgsql
         - SULU_DATABASE_USER=postgres
         - SULU_DATABASE_PASSWORD=postgres
@@ -56,6 +51,8 @@ before_script:
   # the content tests are intensive and there are memory leaks, this is more pronounced with the Jackalope DBAL PHPCR implementation.
   - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
   - phpenv config-rm xdebug.ini
+  - php -i | grep memory_limit
+  - php -m
   - composer self-update
   - if [[ $SULU_PHPCR_TRANSPORT = jackrabbit ]]; then composer require jackalope/jackalope-jackrabbit:~1.2 --no-update --no-interaction ; fi
   - composer update $COMPOSER_FLAGS
