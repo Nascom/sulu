@@ -3,7 +3,7 @@
 /*
  * This file is part of Sulu.
  *
- * (c) MASSIVE ART WebServices GmbH
+ * (c) Sulu GmbH
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -77,15 +77,12 @@ class SuluTestKernel extends SuluKernel
         }
 
         if (self::CONTEXT_ADMIN === $this->getContext()) {
-<<<<<<< HEAD
             $bundles[] = new \Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle();
             $bundles[] = new \FOS\RestBundle\FOSRestBundle();
             $bundles[] = new \Symfony\Bundle\SecurityBundle\SecurityBundle();
             $bundles[] = new \Sulu\Bundle\ResourceBundle\SuluResourceBundle();
-=======
             // rest
             $bundles[] = new \Symfony\Bundle\SecurityBundle\SecurityBundle();
->>>>>>> 1.6.22
             $bundles[] = new \Sulu\Bundle\AdminBundle\SuluAdminBundle();
             $bundles[] = new \Sulu\Bundle\CollaborationBundle\SuluCollaborationBundle();
             $bundles[] = new \Sulu\Bundle\PreviewBundle\SuluPreviewBundle();

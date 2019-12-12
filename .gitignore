@@ -44,6 +44,9 @@
 
 # Meld
 *.orig
+npm-debug.log
+package-lock.json
+.php_cs.cache
 
 # OS generated files
 ._*
@@ -71,3 +74,6 @@ phpunit.xml
 # Jackrabbit
 jackrabbit-standalone*
 jackrabbit/*
+
+# phpunit
+/phpunit.xml

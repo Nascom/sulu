@@ -3,7 +3,7 @@
 /*
  * This file is part of Sulu.
  *
- * (c) MASSIVE ART WebServices GmbH
+ * (c) Sulu GmbH
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -100,6 +100,38 @@ class AccountController extends RestController implements ClassResourceInterface
     {
         // Default contacts list.
         return $this->handleView($this->view(array_values($this->getFieldDescriptors()), 200));
+    }
+
+    /**
+     * Shows a single account with the given id.
+     *
+     * @param int $id
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function getAction($id, Request $request)
+    {
+        $includes = explode(',', $request->get('include'));
+        $accountManager = $this->getAccountManager();
+        $locale = $this->getUser()->getLocale();
+
+        try {
+            $view = $this->responseGetById(
+                $id,
+                function($id) use ($includes, $accountManager, $locale) {
+                    return $accountManager->getByIdAndInclude($id, $locale, $includes);
+                }
+            );
+
+            $view->setSerializationContext(
+                SerializationContext::create()->setGroups(self::$accountSerializationGroups)
+            );
+        } catch (EntityNotFoundException $enfe) {
+            $view = $this->view($enfe->toArray(), 404);
+        }
+
+        return $this->handleView($view);
     }
 
     /**
@@ -738,8 +770,11 @@ class AccountController extends RestController implements ClassResourceInterface
      */
     public function deleteAction($id, Request $request)
     {
-        $delete = function ($id) use ($request) {
-            $account = $this->getRepository()->findAccountByIdAndDelete($id);
+        $delete = function($id) use ($request) {
+            /* @var AccountInterface $account */
+            $account = $this->getDoctrine()
+                ->getRepository($this->getAccountEntityName())
+                ->findAccountByIdAndDelete($id);
 
             if (!$account) {
                 throw new EntityNotFoundException($this->getAccountEntityName(), $id);
